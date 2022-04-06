@@ -1,4 +1,8 @@
-# Translate.to
-Translate App using Python
+## Translate.to
+Translate App with KivyMD
 
-<img src='translate.to.jpg'>
+### Install requirements
+
+` pip install -r requirements.txt `
+
+![Screenshot app](img/translate.to.jpg)
