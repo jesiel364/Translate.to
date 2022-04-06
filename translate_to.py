@@ -3,8 +3,12 @@ from kivy.core.window import Window
 from translate import Translator
 from time import sleep
 from kivymd.uix.menu import MDDropdownMenu
+from kivymd.uix.boxlayout import MDBoxLayout
 
 Window.size = 300, 500
+
+class ContentNavigationDrawer(MDBoxLayout):
+    pass
 
 class translate_to(MDApp):
 	def __init__(self, **kwargs):
@@ -30,27 +34,34 @@ class translate_to(MDApp):
 		self.menu.caller = button
 		self.menu.open()
 
+	
 
 
-	def trans(self):
-		self.root.ids.spin.active = True
+
+	def translate(self):
+		
 		
 		print('Status: Rodando...')
 		txt = self.root.ids.txt.text
-		label = self.root.ids.label
+		lbl = self.root.ids.label
 		
-
-
+		a = self.root.ids.spin.active = True
+		
 		try:
+			def __init__(a):
+				return a
+
+				
 			s = Translator(from_lang = 'pt-br', to_lang = 'english')
 			res = s.translate(txt)
 			print(res)
-			label.text = res
+			lbl.text = res
+			self.root.ids.spin.active = False
 		except Exception as e:
 			print(e)
-			label.text = 'Não foi possivel traduzir o texto'
+			lbl.text = 'Não foi possivel traduzir o texto'
 
-		self.root.ids.spin.active = False
+		
 
 	def save_text(self):
 		label = self.root.ids.label.text
@@ -63,6 +74,8 @@ class translate_to(MDApp):
 		except Exception as e:
 			print(e)
 			print('Ñão foi possivel salvar o arquivo')
+
+	
 
 
 translate_to().run()

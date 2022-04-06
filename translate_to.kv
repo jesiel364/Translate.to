@@ -1,124 +1,152 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+
 <aa@BoxLayout>:
-	
 
-MDBoxLayout:
-	orientation: 'vertical'
+MDScreen:
 
-	MDToolbar:
-		title: 'Translate.to'
-		md_bg_color: .2, .2, .2, 1
-		elevation: 10
-		right_action_items: [['dots-vertical', lambda x: app.callback_menu(x)]]
-		left_action_items: [['menu', lambda x: nav.set_state('toggle') ]]
+    MDNavigationLayout:
 
+        ScreenManager:
 
+            MDScreen:
 
-	FloatLayout:
+                MDToolbar:
+                    title: 'Translate.to'
+                    elevation: 10
+                    pos_hint: {"top": 1}
+                    md_bg_color: .2, .2, .2, 1
+                    specific_text_color: get_color_from_hex("#eeeeee")
+                    left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]
+                    right_action_items: [['dots-vertical', lambda x: app.callback_menu(x)]]
 
-		MDTextField:
-			id: txt
-			text: 'Era uma casa muito engraçada.'
-			hint_text: 'Text'
-			pos_hint: {'center_x': .5, 'center_y': .9}
-			halign: 'center'
-			size_hint_x: .88
-			md_bg_color: .2, .2, .2, 1
+                FloatLayout:
 
-		# MDChooseChip:
-		# 	pos_hint: {'center_x': .5, 'center_y': .8}
-		# 	halign: 'center'
-		# 	size_hint_x: .88
-
-
-		#     MDChip:
-		#     	id: en
-		#         text: 'English'
-		#         icon: 'translate'
-		#         selected_chip_color: 110/255, 69/255, 200/255, 1
-		#         md_bg_color: 110/255, 69/255, 200/255, 1
-		        
-
-		#     MDChip:
-		#     	id: pt
-		#         text: 'Portuguese'
-		#         icon: 'translate'
-		#         selected_chip_color: 110/255, 69/255, 200/255, 1
-		#         callback: print('x')
-		#         md_bg_color: 110/255, 69/255, 200/255, 1
-
-		MDRaisedButton:
-			text: 'Translate'
-			md_bg_color: .2, .2, .2, 1
-			pos_hint: {'center_x': .5, 'center_y': .6}
-			halign: 'center'
-			size_hint_x: .88
-			on_release: app.trans()
-
-		FloatLayout:
-		    size_hint_y: .4
-		    pos_hint_y: .3
-		    height: .6
-
-		    canvas:
-		        Color:
-		            rgba: .2,.2,.1,.2
-		        Rectangle:
-		            pos: self.pos
-		            size: self.size
-
-		    FloatLayout:
-		    	pos_hint_y: .7
-		    	pos_hint_x: .5
-		    	halign: 'center'
-		    	size_hint: .999,.999
-
-		    	MDCard:
-			        orientation: "vertical"
-			        padding: "8dp"
-			        size_hint: None, None
-			        size: "280dp", "180dp"
-			        pos_hint: {"center_x": .5, "center_y": .8}
-
-			        MDLabel:
-			            text: "From Portuguese to English"
-			            font_style: 'H6'
-			            theme_text_color: "Secondary"
-			            adaptive_height: True
-
-			        MDSeparator:
-			            height: "1dp"
-
-			        MDIconButton:
-			            icon: 'heart-outline'
-
-		    	
-					ScrollView:
+					MDTextField:
+						id: txt
+						text: 'Era uma casa muito engraçada.'
+						hint_text: 'Text'
+						pos_hint: {'center_x': .5, 'center_y': .75}
 						halign: 'center'
+						size_hint_x: .88
+						md_bg_color: .2, .2, .2, 1
 
-						height: root.height
-						size_hint_y: .8
-						pos_hint_x: .5
-
-						MDList:
-							halign: 'center'
-						    MDLabel:
-
-						    	id: label
-						        size_hint_y: None
-						        height: self.texture_size[1]
+					# MDChooseChip:
+					# 	pos_hint: {'center_x': .5, 'center_y': .8}
+					# 	halign: 'center'
+					# 	size_hint_x: .88
 
 
-			FloatLayout:
-				MDFloatingActionButton:
-				    icon: "book-plus"
-				    md_bg_color: .2, .2, .2, 1
-				    elevation_normal: 12
-				    pos_hint: {'center_x': .9, 'center_y': .3}
-				    on_release: app.save_text()
+					#     MDChip:
+					#     	id: en
+					#         text: 'English'
+					#         icon: 'translate'
+					#         selected_chip_color: 110/255, 69/255, 200/255, 1
+					#         md_bg_color: 110/255, 69/255, 200/255, 1
+					        
 
-		    MDSpinner:
-		    	id: spin
-		        size_hint: None, None
-		        size: dp(46), dp(46)
-		        pos_hint: {'center_x': .5, 'center_y': .8}
-		        active: False
+					#     MDChip:
+					#     	id: pt
+					#         text: 'Portuguese'
+					#         icon: 'translate'
+					#         selected_chip_color: 110/255, 69/255, 200/255, 1
+					#         callback: print('x')
+					#         md_bg_color: 110/255, 69/255, 200/255, 1
+
+					MDRaisedButton:
+						text: 'Translate'
+						md_bg_color: .2, .2, .2, 1
+						pos_hint: {'center_x': .5, 'center_y': .6}
+						halign: 'center'
+						size_hint_x: .88
+						on_release: app.translate()
+
+					FloatLayout:
+					    size_hint_y: .4
+					    pos_hint_y: .3
+					    height: .6
+
+					    canvas:
+					        Color:
+					            rgba: .2,.2,.1,.2
+					        Rectangle:
+					            pos: self.pos
+					            size: self.size
+
+					    FloatLayout:
+					    	pos_hint_y: .7
+					    	pos_hint_x: .5
+					    	halign: 'center'
+					    	size_hint: .999,.999
+
+					    	MDCard:
+						        orientation: "vertical"
+						        padding: "8dp"
+						        size_hint: None, None
+						        size: "280dp", "180dp"
+						        pos_hint: {"center_x": .5, "center_y": .8}
+
+						        MDLabel:
+						            text: "From Portuguese to English"
+						            font_style: 'H6'
+						            theme_text_color: "Secondary"
+						            adaptive_height: True
+
+						        MDSeparator:
+						            height: "1dp"
+
+						        MDIconButton:
+						            icon: 'heart-outline'
+
+					    	
+								ScrollView:
+									halign: 'center'
+
+									height: root.height
+									size_hint_y: .8
+									pos_hint_x: .5
+
+									MDList:
+										halign: 'center'
+									    MDLabel:
+
+									    	id: label
+									        size_hint_y: None
+									        height: self.texture_size[1]
+
+
+						FloatLayout:
+							MDFloatingActionButton:
+							    icon: "book-plus"
+							    md_bg_color: .2, .2, .2, 1
+							    elevation_normal: 12
+							    pos_hint: {'center_x': .9, 'center_y': .3}
+							    on_release: app.save_text()
+
+					    MDSpinner:
+					    	id: spin
+					        size_hint: None, None
+					        size: dp(46), dp(46)
+					        pos_hint: {'center_x': .5, 'center_y': .8}
+					        active: False
+
+
+			        MDNavigationDrawer:
+			            id: nav_drawer
+			            md_bg_color: get_color_from_hex("#f7f4e7")
+
+			            ContentNavigationDrawer:	
+
+
+
+				
+
+
+				MDNavigationDrawer:
+			    	id: nav_drawer
+			    	md_bg_color: get_color_from_hex("#f7f4e7")
+
+			    	ContentNavigationDrawer:
+
+
+
